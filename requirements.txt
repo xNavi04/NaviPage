@@ -4,11 +4,10 @@ Flask==3.0.0
 Flask-CKEditor==0.5.1
 Flask-Gravatar==0.5.0
 Flask-Login==0.6.3
-Flask-SQLAlchemy= 3.0.5
+Flask-SQLAlchemy==3.0.5
 Flask-WTF==1.2.1
 gunicorn==21.2.0
 pip==23.3.1
 SQLAlchemy==2.0.19
-typing_extensions 4.8.0
 Werkzeug==3.0.1
 WTForms==3.0.1
