@@ -5,7 +5,6 @@ Flask-Gravatar==0.5.0
 Flask-Login==0.6.3
 Flask-WTF==1.1.1
 gunicorn==21.2.0
-pip==23.3.1
 SQLAlchemy==2.0.19
 Werkzeug==2.2.3
 WTForms==3.0.1
