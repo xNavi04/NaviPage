@@ -7,5 +7,5 @@ Flask-SQLAlchemy==3.0.5
 Flask-WTF==1.0.0   # Zmiana wersji na starszą, ale kompatybilną z Pythonem 3.7
 gunicorn==21.2.0
 SQLAlchemy==2.0.19
-Werkzeug==3.0.1
+Werkzeug==2.0.1
 WTForms==3.0.1
