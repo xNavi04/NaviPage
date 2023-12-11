@@ -8,24 +8,9 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
-# Import your forms from the forms.py
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 import os
-import psycopg2
-#test
 
-'''
-Make sure the required packages are installed: 
-Open the Terminal in PyCharm (bottom left). 
-
-On Windows type:
-python -m pip install -r requirements.txt
-
-On MacOS type:
-pip3 install -r requirements.txt
-
-This will install the packages from the requirements.txt for this project.
-'''
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
@@ -46,9 +31,7 @@ gravatar = Gravatar(app,
 # TODO: Configure Flask-Login
 
 
-# CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///posts.db")
-#app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///posts.db"
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -85,7 +68,6 @@ def load_user(user_id):
 
 
 
-# CONFIGURE TABLES
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
 
@@ -101,7 +83,6 @@ class BlogPost(db.Model):
     #author = db.Column(db.String(250), nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
 
-# TODO: Create a User table for all your registered users.
 class User(UserMixin, db.Model):
     __tablename__ = "users"
 
@@ -128,7 +109,6 @@ with app.app_context():
     db.create_all()
 
 
-# TODO: Use Werkzeug to hash the user's password when creating a new user.
 @app.route('/register', methods=["POST", "GET"])
 @notlogin
 def register():
@@ -149,7 +129,6 @@ def register():
     return render_template("register.html", form=form)
 
 
-# TODO: Retrieve a user from the database based on their email. 
 @app.route('/login', methods=["GET", "POST"])
 @notlogin
 def login():
@@ -183,7 +162,6 @@ def get_all_posts():
     return render_template("index.html", all_posts=posts, logged_in=current_user.is_authenticated)
 
 
-# TODO: Allow logged-in users to comment on posts
 @app.route("/post/<int:post_id>", methods=["GET", "POST"])
 def show_post(post_id):
     post = db.get_or_404(BlogPost, post_id)
@@ -200,7 +178,6 @@ def show_post(post_id):
     return render_template("post.html", post=post, logged_in=current_user.is_authenticated, form=form)
 
 
-# TODO: Use a decorator so only an admin user can create a new post
 @app.route("/new-post", methods=["GET", "POST"])
 @admin_only
 def add_new_post():
@@ -220,7 +197,6 @@ def add_new_post():
     return render_template("make-post.html", form=form, logged_in=current_user.is_authenticated)
 
 
-# TODO: Use a decorator so only an admin user can edit a post
 @app.route("/edit-post/<int:post_id>", methods=["GET", "POST"])
 @admin_only
 def edit_post(post_id):
@@ -242,7 +218,6 @@ def edit_post(post_id):
     return render_template("make-post.html", form=edit_form, is_edit=True, logged_in=current_user.is_authenticated)
 
 
-# TODO: Use a decorator so only an admin user can delete a post
 @app.route("/delete/<int:post_id>")
 @admin_only
 def delete_post(post_id):
