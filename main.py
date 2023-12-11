@@ -28,8 +28,6 @@ gravatar = Gravatar(app,
                     base_url=None)
 
 
-# TODO: Configure Flask-Login
-
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///posts.db")
 db = SQLAlchemy()
@@ -45,7 +43,7 @@ def notlogin(f):
         if not current_user.is_authenticated:
             return f(*args, **kwargs)
         else:
-            return redirect(url_for("login"))
+            return abort(404)
     return decorator_function
 
 def admin_only(f):
@@ -56,6 +54,18 @@ def admin_only(f):
                 return abort(403)
             else:
                 return f(*args, **kwargs)
+        except Exception:
+            return abort(404)
+    return decorator_function
+
+def check_login(f):
+    @wraps(f)
+    def decorator_function(*args, **kwargs):
+        try:
+            if not current_user.is_authenticated:
+                return redirect(url_for("login"))
+            else:
+                f(*args, **kwargs)
         except Exception:
             return abort(404)
     return decorator_function
@@ -156,6 +166,7 @@ def logout():
 
 
 @app.route('/')
+@check_login
 def get_all_posts():
     result = db.session.execute(db.select(BlogPost))
     posts = result.scalars().all()
