@@ -163,6 +163,7 @@ def get_all_posts():
 
 
 @app.route("/post/<int:post_id>", methods=["GET", "POST"])
+@login_required
 def show_post(post_id):
     post = db.get_or_404(BlogPost, post_id)
     form = CommentForm()
