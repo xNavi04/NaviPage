@@ -166,7 +166,6 @@ def logout():
 
 
 @app.route('/')
-@check_login
 def get_all_posts():
     result = db.session.execute(db.select(BlogPost))
     posts = result.scalars().all()
@@ -174,7 +173,7 @@ def get_all_posts():
 
 
 @app.route("/post/<int:post_id>", methods=["GET", "POST"])
-@login_required
+@check_login
 def show_post(post_id):
     post = db.get_or_404(BlogPost, post_id)
     form = CommentForm()
