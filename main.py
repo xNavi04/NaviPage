@@ -133,8 +133,10 @@ def register():
             return redirect(url_for("login"))
         else:
             password = generate_password_hash(password, salt_length=8)
-            db.session.add(User(name=username, email=email, password=password))
+            new_user = User(name=username, email=email, password=password)
+            db.session.add(new_user)
             db.session.commit()
+            login_user(new_user)
             return redirect(url_for("get_all_posts"))
     return render_template("register.html", form=form)
 
