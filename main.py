@@ -45,7 +45,7 @@ def notlogin(f):
         if not current_user.is_authenticated:
             return f(*args, **kwargs)
         else:
-            return abort(404)
+            return redirect(url_for("login"))
     return decorator_function
 
 def admin_only(f):
@@ -57,7 +57,7 @@ def admin_only(f):
             else:
                 return f(*args, **kwargs)
         except Exception:
-            return abort(403)
+            return abort(404)
     return decorator_function
 
 
