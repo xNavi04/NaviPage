@@ -153,8 +153,8 @@ def login():
         elif check_password_hash(user.password, password):
             login_user(user)
             return redirect(url_for("get_all_posts"))
-        else:
-            return render_template("login.html", form=form)
+    return render_template("login.html", form=form)
+
 
 
 @app.route('/logout')
