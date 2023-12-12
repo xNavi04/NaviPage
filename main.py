@@ -65,7 +65,7 @@ def check_login(f):
             if not current_user.is_authenticated:
                 return redirect(url_for("login"))
             else:
-                f(*args, **kwargs)
+                return f(*args, **kwargs)
         except Exception:
             return abort(404)
     return decorator_function
