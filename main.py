@@ -150,14 +150,12 @@ def login():
         password = form.password.data
         user = db.session.execute(db.select(User).where(User.email == email)).scalar()
         if not user:
-            flash("This user does not exist")
             return redirect(url_for("register"))
         elif check_password_hash(user.password, password):
             login_user(user)
             return redirect(url_for("get_all_posts"))
         else:
-            flash("Wrong password!")
-    return render_template("login.html", form=form)
+            return render_template("login.html", form=form)
 
 
 @app.route('/logout')
