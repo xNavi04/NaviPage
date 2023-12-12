@@ -129,7 +129,6 @@ def register():
         password = form.password.data
         user = db.session.execute(db.select(User).where(User.name == username)).scalar()
         if user:
-            flash("You have got account")
             return redirect(url_for("login"))
         else:
             password = generate_password_hash(password, salt_length=8)
