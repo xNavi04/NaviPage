@@ -1,3 +1,6 @@
+**PASSWORD AND EMAIL FOR ADMIN**
+**>>>> Email: admin@gmail.com password: Admin1230
+
 Welcome to my web application 🚀 
 
 Core Functionalities:
