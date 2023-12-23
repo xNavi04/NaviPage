@@ -1,13 +1,9 @@
 
-Car Marketplace Web Application
+**Car Marketplace Web Application**
 
 Welcome to our Car Marketplace, a dynamic web application built with Flask, designed to provide users with a seamless platform for buying and selling cars. Whether you're a car enthusiast, a seller looking to showcase your vehicles, or a buyer searching for the perfect ride, our application has you covered.
 
-**🔐 Admin Credentials:**
-
-Email: admin@gmail.com
-Password: Admin1230
-Key Features:
+**Key Features:**
 
 User Authentication: Enjoy a secure and personalized experience with user authentication. Register easily and explore the full potential of our marketplace.
 
